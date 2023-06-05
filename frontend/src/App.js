@@ -1,9 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
+import PinPointStatic from './map/PinPointStatic';
+import PipPointDynamic from './map/PinPointDynamic';
 
 function App() {
   return (
-    <div className="App"> </div>
+    <div>
+      <PinPointStatic attraction_name="Valea Budului"></PinPointStatic>
+      <PipPointDynamic></PipPointDynamic>
+    </div>
   );
 }
 

@@ -1,0 +1,68 @@
+/* Wrapper */
+.pin-point__wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Pin point */
+.pin-point{
+    background: black;
+    height: 2vh;
+    width: 2vh;
+    border-radius: 50%;
+}
+
+.pin-point:hover{ cursor: pointer;}
+
+/* For configuration of routes */
+.pin-point__added{
+    background: #097969;
+}
+
+/* Pin point title */
+.pin-point__title{
+    /* Max width of title = 20% of user's screen width*/
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 20vw;
+
+    font-weight: 800;
+    padding: 0.5vw 1.5vw;
+    border-radius: 20px;
+    margin-bottom: 0px;
+}
+
+/* Add button */
+.pin_point__add_visibile{ visibility: visible;}
+.pin_point__add_hidden{ visibility: hidden;}
+
+.pin-point__add{
+    background: pink;
+    position: relative;
+    width: 60px;
+
+    padding: 10px;
+    margin-bottom: 15px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 16px, rgba(0, 0, 0, 0.22) 0px 8px 4px;
+    border: none;
+    border-radius: 10px;
+}
+
+.pin-point__add::after{
+    content:"";
+    position: absolute;
+
+    bottom: -11px;
+    left: 20px;
+
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 12px solid pink;
+}
+
+.pin-point__add:hover{
+    cursor: pointer;
+}
