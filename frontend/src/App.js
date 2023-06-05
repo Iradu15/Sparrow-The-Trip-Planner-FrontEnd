@@ -1,10 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import GoOnWalkSearchBar from "./map/GoOnWalkSearchBar";
 
 function App() {
   return (
-    <div className="App"> </div>
-  );
+      <GoOnWalkSearchBar></GoOnWalkSearchBar>
+    );
 }
 
 export default App;
