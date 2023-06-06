@@ -1,17 +1,37 @@
 import { useLoadScript } from "@react-google-maps/api"
-import { useState, useMemo, useCallback, useRef } from "react"
-import { GoogleMap, MarkerClusterer } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
+import { useState } from "react";
 
+import MarkerStatic from "./MarkerStatic";
+import MarkerDynamic from "./MarkerDynamic";
 
 const center = {lat: 44.435569, lng: 26.099511};
 
 export default function MainMap({ children }) {
+    const [map, setMap] = useState(null);
     const {isLoaded} = useLoadScript({
-        googleMapsApiKey: "",
+        googleMapsApiKey: ""
     });
 
     if (!isLoaded) return <>loading...</>;
 
-    return (<GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
+    const handleMapLoad = (map) => {
+        setMap(map);
+    }
+
+    return (
+        <GoogleMap 
+            zoom={10} 
+            center={center}
+            mapContainerClassName="map-container"
+            onLoad={handleMapLoad}>
+
+                <MarkerDynamic
+                    title="Vestul Salbatic" 
+                    lat={44.403802} 
+                    lng={26.092205}
+                    map={map}
+                ></MarkerDynamic>
+        
         </GoogleMap>)
 }
