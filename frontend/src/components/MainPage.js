@@ -1,23 +1,63 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const MainPage = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSignup, setIsSignup] = useState(false);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // Perform login or signup logic here
-    // You can validate the email, password, and handle any errors
-    // For simplicity, this example just displays the entered values
-    console.log("Email:", email);
-    console.log("Password:", password);
 
-    if (isSignup) {
-      console.log("Perform signup logic");
-    } else {
-      console.log("Perform login logic");
+    try {
+      if (isSignup) {
+        // Perform signup logic
+      
+        //login to django admin interface with parola+username pizdoase
+        const response = await axios.post(
+          "http://127.0.0.1:8000/admin/login/?next=/admin/",
+          {
+            username: "admin",
+            password: "admin",
+          }
+        );
+        
+        // Check the response status to determine if the login was successful
+        if (response.status === 200) {
+          // Login successful, redirect to the desired admin page
+          window.location.href =
+            "http://127.0.0.1:8000/admin/auth/user/add/";
+
+            // const response2 = await axios.post(
+            //   "http://127.0.0.1:8000/admin/login/",
+            //   {
+            //     username,
+            //     password,
+            //   }
+            // );
+
+        } else {
+          // Login failed, handle the error
+          setError("Login failed. Please try again.");
+        }
+
+        console.log("Signup successful:", response.data);
+      } else {
+        // Perform login logic
+        const response = await axios.post("http://127.0.0.1:8000/auth/login/", {
+          username,
+          password,
+        });
+        console.log("Login successful:", response.data);
+      }
+
+      // Clear form inputs and error message
+      setUsername("");
+      setPassword("");
+      setError("");
+    } catch (error) {
+      setError("Error occurred. Please try again."); // Set the error message based on the response from the API
     }
   };
 
@@ -32,10 +72,10 @@ const MainPage = () => {
         {error && <p className="error">{error}</p>}
         <form onSubmit={handleFormSubmit}>
           <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <input
             type="password"

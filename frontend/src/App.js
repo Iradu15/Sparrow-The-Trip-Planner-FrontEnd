@@ -3,6 +3,7 @@ import './App.css';
 import MainPage from './components/MainPage';
 import {BrowserRouter as Router,Routes, Route, Link } from "react-router-dom"
 import About from './components/About';
+import axios from "axios";
 
 function App() {
   return (
