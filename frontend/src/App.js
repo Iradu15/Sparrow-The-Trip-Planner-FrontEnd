@@ -19,8 +19,8 @@ function App() {
         </ul>
 
         <Routes>
-          <Route exact path='/' element={< MainPage />}></Route>
-          <Route exact path='/design' element={< MainPage2 />}></Route>
+          <Route exact path='/' element={< MainPage2 />}></Route>
+          <Route exact path='/design' element={< MainPage />}></Route>
         </Routes>
 
       </div>
