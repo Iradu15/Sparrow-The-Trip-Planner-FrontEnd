@@ -51,23 +51,15 @@ const MainPage = () => {
       setShowSuccess(true);
       
     } catch (error) {
-      // Handle the error response
-      if (error.response) {
-        // The request was made and the server responded with an error status
-        const errorData = error.response.data;
-        const errorMessage =
-          errorData.detail || "Error occurred. Please try again.";
-        setError(errorMessage);
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.log(error.request);
-        setError("No response received from the server.");
-      } else {
-        // Something happened in setting up the request that triggered an error
-        console.log("Error:", error.message);
-        setError("Error occurred. Please try again.");
+        if (error.response && error.response.data && error.response.data.detail) {
+          setError(error.response.data.detail);
+        } else if (error.message) {
+          setError(error.message);
+        } else {
+          setError("An error occurred.");
+        }
+        setShowSuccess(false);
       }
-    }
   };
 
   useEffect(() => {

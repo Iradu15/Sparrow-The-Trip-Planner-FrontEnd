@@ -51,22 +51,14 @@ const MainPage = () => {
       setShowSuccess(true);
       
     } catch (error) {
-      // Handle the error response
-      if (error.response) {
-        // The request was made and the server responded with an error status
-        const errorData = error.response.data;
-        const errorMessage =
-          errorData.detail || "Error occurred. Please try again.";
-        setError(errorMessage);
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.log(error.request);
-        setError("No response received from the server.");
+      if (error.response && error.response.data && error.response.data.detail) {
+        setError(error.response.data.detail);
+      } else if (error.message) {
+        setError(error.message);
       } else {
-        // Something happened in setting up the request that triggered an error
-        console.log("Error:", error.message);
-        setError("Error occurred. Please try again.");
+        setError("An error occurred.");
       }
+      setShowSuccess(false);
     }
   };
 
@@ -101,6 +93,7 @@ const MainPage = () => {
         <Paper elevation={3} sx={{ padding: "2rem" }}>
           <Typography variant="h2">{isSignup ? "Sign Up" : "Login"}</Typography>
           {error && <Typography color="error">{error}</Typography>}
+
           <form onSubmit={handleFormSubmit}>
             <TextField
               type="text"
