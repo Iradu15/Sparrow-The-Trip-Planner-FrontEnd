@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@mui/icons-material": "^5.11.16",
-    "axios": "^1.4.0"
+    "axios": "^1.4.0",
+    "js-cookie": "^3.0.5"
   }
 }
