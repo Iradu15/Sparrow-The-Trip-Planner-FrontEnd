@@ -28,9 +28,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 20vw;
+    font-size: 16px;
 
     font-weight: 800;
-    padding: 0.5vw 1.5vw;
+    padding: 0.5vw 0.5vw;
     border-radius: 20px;
     margin-bottom: 0px;
 }
@@ -43,26 +44,19 @@
     background: pink;
     position: relative;
     width: 60px;
+    text-align: center;
 
-    padding: 10px;
-    margin-bottom: 15px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 16px, rgba(0, 0, 0, 0.22) 0px 8px 4px;
+    padding: 5px;
+    margin-bottom: 5px;
     border: none;
     border-radius: 10px;
 }
 
-.marker__add::after{
-    content:"";
-    position: absolute;
-
-    bottom: -11px;
-    left: 20px;
-
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 12px solid pink;
-}
-
 .marker__add:hover{
     cursor: pointer;
+}
+
+/* Modify Google Maps' Info Window style */
+.gm-style .gm-style-iw-c{
+    padding-left: 16px;
 }

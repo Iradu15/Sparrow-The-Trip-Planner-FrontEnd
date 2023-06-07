@@ -1,5 +1,5 @@
 import { useLoadScript } from "@react-google-maps/api"
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap } from "@react-google-maps/api";
 import { useState } from "react";
 
 import MarkerStatic from "./MarkerStatic";
@@ -32,6 +32,13 @@ export default function MainMap({ children }) {
                     lng={26.092205}
                     map={map}
                 ></MarkerDynamic>
+
+                <MarkerStatic
+                    title="Grozavesti"
+                    lat={44.411750} 
+                    lng={26.093940}
+                    map={map}
+                ></MarkerStatic>
         
         </GoogleMap>)
 }
