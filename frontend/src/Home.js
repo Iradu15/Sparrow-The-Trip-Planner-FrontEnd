@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback, useRef } from "react";
-import { Marker, useJsApiLoader, GoogleMap, MarkerClusterer } from "@react-google-maps/api";
+import { useState, useEffect } from "react";
 import {TextField} from "@mui/material";
+import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
+import MarkerStatic from "./map-components/MarkerStatic";
 
 
 // when no markers are provided, the map will be centered so that the whole world is visible
@@ -21,7 +22,8 @@ export default function Home() {
     const [isVerified, setIsVerified] = useState(true);
     const [routes, setRoutes] = useState([]);
 
-    const markers = routes.map(route => <Marker key={route.id} position={{lat: route.startingPointLat, lng: route.startingPointLon}}/>)
+    const markers = routes.map(route =>
+        <MarkerStatic key={route.id} lat={route.startingPointLat} lng={route.startingPointLon} title={route.title} map={map} />);
 
     // delay data fetching by 0.5s after the user stopped typing
     useEffect(() => {
@@ -46,38 +48,4 @@ export default function Home() {
             </GoogleMap>
         }
     </>;
-
-    // // hook which centers the map around the provided markers and sets the zoom appropriately;
-    // // when no markers are provided, if the user chooses to provide their location, the map is
-    // // centered accordingly;
-    // // if all else fails, the map goes into the whole-world view
-    // const onLoad = useCallback(
-    //     (map) => {
-    //         if (markers !== []) {
-    //             const bounds = new window.google.maps.LatLngBounds();
-    //
-    //             // extend the bounds by each marker's coordinates
-    //             markers.forEach((location) => {
-    //                 bounds.extend(location.props.position);
-    //             })
-    //
-    //             map.fitBounds(bounds);
-    //         }
-    //     },
-    //     []);
-    //
-    // const onClick = useCallback(
-    //     (event) => {
-    //         const clickedPosition = {lat: event.latLng.lat(), lng: event.latLng.lng()};
-    //
-    //         // update the state in the parent component
-    //         setMarkerCoordinatesInParent(clickedPosition);
-    //
-    //         // update the marker coordinates
-    //         setCurrentMarkerCoordinates(clickedPosition);
-    //     },
-    //     []);
-    //
-
-    //
 }
