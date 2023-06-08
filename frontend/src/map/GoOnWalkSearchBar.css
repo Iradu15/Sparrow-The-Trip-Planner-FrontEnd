@@ -1,0 +1,91 @@
+.search_section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.search_bar_wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100px;
+    padding: 10px;
+}
+
+/* Search bar */
+.search_bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 30px;
+    padding: 20px;
+    
+    background: rgba( 255, 255, 255, 0.5 );
+    box-shadow: 0 4px 16px 0 rgba(116, 116, 116, 0.37);
+    backdrop-filter: blur( 7px );
+    -webkit-backdrop-filter: blur( 7px );
+    border: 2px solid rgba( 255, 255, 255, 0.18 );
+
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.search_bar__focused{
+    border: 2px solid orange;
+    box-shadow: 0 8px 32px 0 orange;
+}
+
+.search_bar img{
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+}
+
+.search_bar input{
+    border: none;
+    padding: 5px;
+}
+.search_bar input:focus{ outline: none;}
+
+/* Search checkbox */
+.search_checkbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: orange;
+    height: 30px;
+    padding: 22.5px;
+    margin-left: 5px;
+    box-shadow:  0 4px 16px 0 rgba(116, 116, 116, 0.37);
+
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.search_checkbox input{
+    margin-right: 10px;
+}
+
+/* Search button */
+.btn__search{
+    background: rgba( 255, 255, 255, 0.5 );
+    backdrop-filter: blur( 7px );
+    -webkit-backdrop-filter: blur( 7px );
+    border: 2px solid rgba( 255, 255, 255, 0.18 );
+
+    font-weight: 600;
+    padding: 10px;
+    border: 2px solid orange;
+    color: orange;
+    text-transform: uppercase;
+
+    transition: 0.4s;
+}
+
+.btn__search:hover{
+    transform: translateY(-5px);
+}
