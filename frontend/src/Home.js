@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {TextField} from "@mui/material";
+import { TextField } from "@mui/material";
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
 import MarkerStatic from "./map-components/MarkerStatic";
 
@@ -9,14 +9,12 @@ const defaultCenter = {lat: 45, lng: 0};
 // 'travel' map style; disable map type switch buttons
 const options = {mapId: "77ee2dda51aa3d0d", mapTypeControl: false};
 
-// the setMarker prop should be provided only in the context of a map from which input is expected (e.g. add attraction);
-// for purely output-generating maps (all others), when no markers are provided, it is appropriate for the map to go
-// into the whole-world view directly, without asking permission to acquire the user's current location;
 export default function Home() {
     const {isLoaded} = useJsApiLoader({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     });
 
+    const [error, setError] = useState(false);
     const [map, setMap] = useState();
     const [searchQuery, setSearchQuery] = useState('');
     const [isVerified, setIsVerified] = useState(true);
@@ -35,10 +33,14 @@ export default function Home() {
         if (searchQuery !== '')
             fetch('http://localhost:8000/route/list/?search=' + searchQuery + '&verified=' + isVerified, {method: 'GET', credentials: 'include'}).
             then(data => data.json()).
-            then(data => {setRoutes(data.results); });
+            then(data => setRoutes(data.results)).
+            catch(error => setError(error));
         else
             setRoutes([]);
     }
+
+    if (error)
+        return <></>
 
     return <>
         <TextField label="Search Field" type="search" onChange={event => setSearchQuery(event.target.value)} value={searchQuery} />
