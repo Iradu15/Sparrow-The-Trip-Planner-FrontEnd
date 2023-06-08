@@ -1,8 +1,23 @@
 .search_section{
+    z-index: 10;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    background: rgba( 255, 255, 255, 0.5 );
+    box-shadow: 0 8px 32px 0 rgba(116, 116, 116, 0.37);
+    backdrop-filter: blur( 7px );
+    -webkit-backdrop-filter: blur( 7px );
+
+    border: 2px solid rgba( 255, 255, 255, 0.18 );
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .search_bar_wrapper{
@@ -19,23 +34,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    background: white; 
     height: 30px;
-    padding: 20px;
+    padding: 22.5px;
     
-    background: rgba( 255, 255, 255, 0.5 );
-    box-shadow: 0 4px 16px 0 rgba(116, 116, 116, 0.37);
-    backdrop-filter: blur( 7px );
-    -webkit-backdrop-filter: blur( 7px );
-    border: 2px solid rgba( 255, 255, 255, 0.18 );
+    border: 2px solid transparent;
 
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
 }
 
 .search_bar__focused{
-    border: 2px solid orange;
-    box-shadow: 0 8px 32px 0 orange;
+    border: 2px solid var(--second-color);
+    box-shadow: 0 8px 32px 0 var(--second-color);
 }
 
 .search_bar img{
@@ -56,7 +67,9 @@
     align-items: center;
     justify-content: center;
 
-    background: orange;
+    background: var(--second-color);
+    color: var(--white);
+
     height: 30px;
     padding: 22.5px;
     margin-left: 5px;
@@ -77,10 +90,10 @@
     -webkit-backdrop-filter: blur( 7px );
     border: 2px solid rgba( 255, 255, 255, 0.18 );
 
+    background: var(--second-color);
     font-weight: 600;
     padding: 10px;
-    border: 2px solid orange;
-    color: orange;
+    color: var(--white);
     text-transform: uppercase;
 
     transition: 0.4s;
