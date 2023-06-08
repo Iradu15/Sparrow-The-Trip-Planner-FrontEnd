@@ -1,12 +1,9 @@
-import './App.css';
-import MainMap from "./map-components/MainMap"
+import NavigationBar from './navigation/NavigationBar';
 
 function App() {
-  return <div className="container">
-    <div className="map">
-      <MainMap/>
-    </div>
-  </div>;
+  return (
+    <NavigationBar></NavigationBar>
+  );
 }
 
 export default App;
