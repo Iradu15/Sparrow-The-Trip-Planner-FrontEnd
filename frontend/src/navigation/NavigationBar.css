@@ -4,7 +4,7 @@
     align-items: center;
 
     background: var(--black);
-    padding: 1rem;
+    padding: 0.5rem 1rem;
 }
 
 #navigation__logo{ width: 150px; }

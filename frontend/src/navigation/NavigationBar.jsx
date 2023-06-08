@@ -7,6 +7,7 @@ export default function NavigationBar(){
         <div class="navigation__bar">
             <img src={logo} id="navigation__logo"/>
             <div class="navigation__links">
+                <div className="navigation__link">Route +</div>
                 <div className="navigation__link">Attraction +</div>
                 <div className="navigation__link">Explore</div>
             </div>
