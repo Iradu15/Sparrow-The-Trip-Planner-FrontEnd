@@ -1,0 +1,62 @@
+/* Wrapper */
+.marker__wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Pin point */
+.marker{
+    background: black;
+    height: 2vh;
+    width: 2vh;
+    border-radius: 50%;
+}
+
+.marker:hover{ cursor: pointer;}
+
+/* For configuration of routes */
+.marker__added{
+    background: #097969;
+}
+
+/* Pin point title */
+.marker__title{
+    /* Max width of title = 20% of user's screen width*/
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 20vw;
+    font-size: 16px;
+
+    font-weight: 800;
+    padding: 0.5vw 0.5vw;
+    border-radius: 20px;
+    margin-bottom: 0px;
+}
+
+/* Add button */
+.marker__add_visibile{ visibility: visible;}
+.marker__add_hidden{ visibility: hidden;}
+
+.marker__add{
+    background: pink;
+    position: relative;
+    width: 60px;
+    text-align: center;
+
+    padding: 5px;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 10px;
+}
+
+.marker__add:hover{
+    cursor: pointer;
+}
+
+/* Modify Google Maps' Info Window style */
+.gm-style .gm-style-iw-c{
+    padding-left: 16px;
+}
