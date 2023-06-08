@@ -10,9 +10,8 @@ const options = {mapId: "77ee2dda51aa3d0d", mapTypeControl: false};
 // the setMarker prop should be provided only in the context of a map from which input is expected (e.g. add attraction);
 // for purely output-generating maps (all others), when no markers are provided, it is appropriate for the map to go
 // into the whole-world view directly, without asking permission to acquire the user's current location;
-export default function MainMap({ children, setSelectedResources, setSearchedResources, searchedResources, id,  type}) {
+export default function MainMap({ id,  type, searchQuery, verified }) {
     const [currentMarkerCoordinates, setCurrentMarkerCoordinates] = useState(null);
-    const [selectedResources, setSelectedResourcesInCurrent] = useState([]);
 
     const {isLoaded} = useJsApiLoader({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
