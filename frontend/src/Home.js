@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
 import MarkerStatic from "./map-components/MarkerStatic";
 import GoOnWalkSearchBar from "./map/GoOnWalkSearchBar";
-import {isLoggedIn, credentials} from './components/MainPage2'
+import { isLoggedIn, credentials } from "./components/MainPage2";
 
 // when no markers are provided, the map will be centered so that the whole world is visible
 const defaultCenter = { lat: 45, lng: 0 };
@@ -17,7 +17,7 @@ export default function Home() {
   });
 
   const [error, setError] = useState(false);
-  const [map, setMap] = useState(null);
+  const [map, setMap] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [isVerified, setIsVerified] = useState(false);
   const [routes, setRoutes] = useState([]);
@@ -30,40 +30,37 @@ export default function Home() {
     setIsVerified(value);
   };
 
-  // delay data fetching by 0.5s after the user stopped typing
   useEffect(() => {
     const timeout = setTimeout(fetchRoutes, 500);
     return () => clearTimeout(timeout);
   }, [searchQuery, isVerified]);
 
   const fetchRoutes = () => {
-    if (isLoggedIn) {
-      // Make the authenticated fetch request
+    if (isLoggedIn && searchQuery !== "") {
       const credentialsString = `${credentials.username}:${credentials.password}`;
       const encodedCredentials = btoa(credentialsString);
-
+      
       fetch(
         `http://localhost:8000/route/list/?search=${searchQuery}&verified=${isVerified}`,
-        { method: "GET", credentials: "include", headers: {
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
             Authorization: `Basic ${encodedCredentials}`,
-            // Other headers if needed
-          }, }
+          },
+        }
       )
         .then((data) => data.json())
         .then((data) => setRoutes(data.results))
         .catch((error) => setError(error));
-        console.log('fetch ok, is loggedIn')
-    } 
-    else {
-      // Handle the case when the user is not logged in
-      // You can show an error message or redirect to the login page
-      console.log('User not logged in')
-      setError("User not logged in.");
+        console.log('fetch ok, logged in')
+    } else {
+      console.log(isLoggedIn)
+      console.log('routes [] for else')
+      setRoutes([]);
     }
   };
 
-
-  
   if (error) {
     return <></>;
   }
