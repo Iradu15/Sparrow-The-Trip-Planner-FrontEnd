@@ -1,3 +1,6 @@
+# jetbrains
+.idea
+
 # dependencies
 frontend/node_modules
 frontend/.pnp

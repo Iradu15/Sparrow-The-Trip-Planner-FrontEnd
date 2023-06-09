@@ -3,6 +3,11 @@ import MainPage from './components/MainPage';
 import {BrowserRouter as Router,Routes, Route, Link } from "react-router-dom"
 import MainPage2 from './components/MainPage2';
 import axios from "axios";
+import MainMap from "./map-components/MainMap";
+import Home from "./Home";
+import RouteView from "./RouteView"
+import { Container } from "@mui/material";
+import { Marker } from "@react-google-maps/api";
 
 function App() {
   return (
