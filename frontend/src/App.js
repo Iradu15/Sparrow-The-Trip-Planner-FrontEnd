@@ -16,24 +16,23 @@ function App() {
       <div className="App">
         <ul>
           <li>
-            <Link to="/">Main Page</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
             <Link to="/authentication">Authentication</Link>
           </li>
           <li>
-              <Link to="/">Main Page</Link>
+          <Link to="/authentication2">Authentication2</Link>
           </li>
           <li>
-            <Link to="/">Main Page</Link>
-          </li>
-          <li>
-            <Link to="/">Main Page</Link>
+            <Link to="/route/{id}">Main Page</Link>
           </li>
         </ul>
         <Routes>
-          <Route exact path='/' element={< MainPage2 />}></Route>
+          <Route exact path='/' element={< Home />}></Route>
           <Route exact path='/authentication' element={< MainPage2 />}></Route>
+          <Route exact path='/authentication2' element={< MainPage />}></Route>
+          <Route exact path="/route/:id" element={<RouteView />} />
         </Routes>
 
       </div>
