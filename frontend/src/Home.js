@@ -16,10 +16,10 @@ export default function Home() {
   });
 
   const [error, setError] = useState(false);
-  const [map, setMap] = useState();
+  const [map, setMap] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [isVerified, setIsVerified] = useState(false);
-  const [routes, setRoutes] = useState(null);
+  const [routes, setRoutes] = useState([]);
 
   const handleSearchQueryChange = (value) => {
     setSearchQuery(value);
@@ -53,7 +53,7 @@ export default function Home() {
     return <></>;
   }
 
-  let markers = [];
+  let markers = null;
   if (routes && routes.length > 0 && map) {
     markers = routes.map((route) => (
       <MarkerStatic
