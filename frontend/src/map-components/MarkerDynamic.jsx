@@ -5,15 +5,13 @@ import pin from "../assets/images/icons/pin.png";
 import pin_added from "../assets/images/icons/pin_added.png";
 import "./Marker.css";
 
-export default function MarkerStatic(props){
+export default function MarkerDynamic(props){
     // map will be passed from parent component
     const [map, setMap] = useState(null);
     // the infoWindow above the marker
     const [infoWindow, setInfoWindow] = useState(null);
-    // icon for the marker
-    const [pin_icon, setPinIcon] = useState(pin);
     // 'ADD' button is visible handler
-    const [addVisible, setAddVisible] = useState(true);
+    const [addVisible, setAddVisible] = useState(props.addVisible);
     const marker_position = {lat: props.lat, lng: props.lng};
 
     useEffect(() => {
@@ -21,8 +19,8 @@ export default function MarkerStatic(props){
     }, [props.map]);
 
     const handleAddClick = () => {
-        setPinIcon(pin_added);
         setAddVisible(!addVisible);
+        props.onAdd(props.id);
     }
 
     // create the content for info window
@@ -78,7 +76,7 @@ export default function MarkerStatic(props){
     return(
         <div>            
             <Marker
-                icon={pin_icon}
+                icon={addVisible ? pin : pin_added}
                 position={marker_position}
                 onClick={(marker) => handleMarkerClick(marker)}
             />
