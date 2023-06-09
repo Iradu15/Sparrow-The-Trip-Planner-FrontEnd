@@ -50,6 +50,7 @@ export default function RouteView({ routeId }) {
   return (
     <>
       <div>
+        console.log(route);
         {route.verified && <h4>verified!</h4>}
         <h3>{route.title}</h3>
         <h5>{route.publicationDate}</h5>

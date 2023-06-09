@@ -33,7 +33,7 @@ function App() {
           <Route exact path='/authentication' element={< MainPage2 />}></Route>
           <Route exact path='/authentication2' element={< MainPage />}></Route>
           <Route exact path="/route/:id" element={<RouteView />} />
-          <Route exact path="/route13" element={<RouteView routeId={13} />} />
+          {/* <Route exact path="/route13" element={<RouteView routeId={13} />} /> */}
         </Routes>
 
       </div>

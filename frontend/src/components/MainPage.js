@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Paper, TextField, Button, Typography, Link, Snackbar } from "@mui/material";
+//import * as Keychain from "react-native-keychain";
+
+export let isLoggedIn = false;
+export let credentials = null;
 
 const MainPage = () => {
   const [username, setUsername] = useState("");
@@ -14,6 +18,7 @@ const MainPage = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [isSignup, setIsSignup] = useState(false);
+  
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -32,13 +37,22 @@ const MainPage = () => {
           },
           birthDate: "09.11.1990",
         });
+        // Store signup data securely
+        //await Keychain.setGenericPassword(username, password);
+        credentials = {username, password}
         setSuccessMessage("SignUp successful!");
-      } else {
+      } 
+      else {
         // Perform login logic
         const response = await axios.post("http://127.0.0.1:8000/auth/login/", {
           username,
           password,
         });
+        isLoggedIn = true;
+        // Store login data securely
+        //await Keychain.setGenericPassword(username, password);
+        credentials = {username, password}
+        console.log(credentials)
         setSuccessMessage("Login successful!");
       }
 
@@ -51,15 +65,15 @@ const MainPage = () => {
       setShowSuccess(true);
       
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.detail) {
-        setError(error.response.data.detail);
-      } else if (error.message) {
-        setError(error.message);
-      } else {
-        setError("An error occurred.");
+        if (error.response && error.response.data && error.response.data.detail) {
+          setError(error.response.data.detail);
+        } else if (error.message) {
+          setError(error.message);
+        } else {
+          setError("An error occurred.");
+        }
+        setShowSuccess(false);
       }
-      setShowSuccess(false);
-    }
   };
 
   useEffect(() => {
@@ -89,11 +103,10 @@ const MainPage = () => {
 
 
       <div className="form-container">
-  
+
         <Paper elevation={3} sx={{ padding: "2rem" }}>
           <Typography variant="h2">{isSignup ? "Sign Up" : "Login"}</Typography>
           {error && <Typography color="error">{error}</Typography>}
-
           <form onSubmit={handleFormSubmit}>
             <TextField
               type="text"
@@ -163,3 +176,4 @@ const MainPage = () => {
 };
 
 export default MainPage;
+
