@@ -6,6 +6,7 @@ import axios from "axios";
 
 function App() {
   return (
+    //routing 
     <Router>
       <div className="App">
         <ul>
@@ -13,13 +14,21 @@ function App() {
             <Link to="/">Main Page</Link>
           </li>
           <li>
-            <Link to="/design">Design</Link>
+            <Link to="/authentication">Authentication</Link>
+          </li>
+          <li>
+              <Link to="/">Main Page</Link>
+          </li>
+          <li>
+            <Link to="/">Main Page</Link>
+          </li>
+          <li>
+            <Link to="/">Main Page</Link>
           </li>
         </ul>
-
         <Routes>
           <Route exact path='/' element={< MainPage2 />}></Route>
-          <Route exact path='/design' element={< MainPage />}></Route>
+          <Route exact path='/authentication' element={< MainPage2 />}></Route>
         </Routes>
 
       </div>
