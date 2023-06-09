@@ -13,7 +13,7 @@ const options = { mapId: "77ee2dda51aa3d0d", mapTypeControl: false };
 
 export default function Home() {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: "AIzaSyDDSZwOALrOAUzlAspZcreypL-i1ewGXWE",
   });
 
   const [error, setError] = useState(false);
