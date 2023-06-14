@@ -1,14 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
 import MarkerStatic from "./map-components/MarkerStatic";
-import {credentials, isLoggedIn} from './components/MainPage2'
+import { useParams } from "react-router-dom";
+
+// import {credentials, isLoggedIn} from './components/MainPage2'
  
 // when no markers are provided, the map will be centered so that the whole world is visible
 const defaultCenter = {lat: 45, lng: 0};
 // 'travel' map style; disable map type switch buttons
 const options = {mapId: "77ee2dda51aa3d0d", mapTypeControl: false};
 
-export default function RouteView({ routeId }) {
+export default function RouteView() {
+  const { routeId } = useParams();
+  useEffect(() => {
+    console.log("routeId", routeId)
+  }, [routeId]);
+
     const {isLoaded} = useJsApiLoader({
         googleMapsApiKey: "AIzaSyDDSZwOALrOAUzlAspZcreypL-i1ewGXWE",
     });
@@ -20,7 +27,7 @@ export default function RouteView({ routeId }) {
 
 
     let markers = null;
-    if (map) {
+    if (map && attractions.length > 0) {
       markers = attractions.map((attraction) => (
         <MarkerStatic
           key={attraction.id}
@@ -38,27 +45,27 @@ export default function RouteView({ routeId }) {
    
     useEffect(() => {
 
-      if(isLoggedIn){
-        const credentialsString = `${credentials.username}:${credentials.password}`;
-        const encodedCredentials = btoa(credentialsString);
-      
-  
-        fetch('http://localhost:8000/route/detail/' + routeId + '/', {headers: {
-          Authorization: `Basic ${encodedCredentials}`,
-        },}).
-        then(data => data.json()).
-        then(data => setRoute(data)).
-        catch(error => setError(error));
-  
-        // fetch the associated attractions
-        fetch('http://localhost:8000/attraction/list/?isWithin__route_id=' + routeId, {headers: {
-          Authorization: `Basic ${encodedCredentials}`,
-        },}).
-        then(data => data.json()).
-        then(data => setAttractions(data.results)).
-        catch(error => setError(error));
-      }
-      console.log(isLoggedIn)
+      // if(isLoggedIn){
+      // const credentialsString = `${credentials.username}:${credentials.password}`;
+      // const encodedCredentials = btoa(credentialsString);
+    
+
+      fetch('http://localhost:8000/route/detail/' + routeId + '/', {headers: {
+        // Authorization: `Basic ${encodedCredentials}`,
+      },}).
+      then(data => data.json()).
+      then(data => setRoute(data)).
+      catch(error => setError(error));
+
+      // fetch the associated attractions
+      fetch('http://localhost:8000/attraction/list/?isWithin__route_id=' + routeId, {headers: {
+        // Authorization: `Basic ${encodedCredentials}`,
+      },}).
+      then(data => data.json()).
+      then(data => setAttractions(data.results)).
+      catch(error => setError(error));
+      // }
+      // console.log(isLoggedIn)
       
     }, []);
 

@@ -24,16 +24,16 @@ function App() {
           {/* <li>
           <Link to="/authentication2">Authentication2</Link>
           </li> */}
-          <li>
+          {/* <li>
           <Link to="/route13">route13</Link>
-          </li>
+          </li> */}
         </ul>
         <Routes>
           <Route exact path='/' element={< Home />}></Route>
           <Route exact path='/authentication' element={< MainPage />}></Route>
           {/* <Route exact path='/authentication2' element={< MainPage />}></Route> */}
-          <Route exact path="/route/:id" element={<RouteView />} />
-          <Route exact path="/route13" element={<RouteView routeId={11} />} />
+          <Route exact path="/route/:routeId" element={<RouteView />} />
+          {/* <Route exact path="/route13" element={<RouteView routeId={11} />} /> */}
         </Routes>
 
       </div>
