@@ -41,7 +41,6 @@ function GoOnWalkSearchBar({onSearchChange, onVerifiedChange}){
                     Verified Route
                 </div>
             </div>
-            <button className="btn__search">Search</button>
         </div>
     )
 }

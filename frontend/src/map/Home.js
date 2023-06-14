@@ -1,18 +1,17 @@
-import "./assets/CSS/general-style.css"
+import "../assets/CSS/general-style.css";
 import { useState, useEffect } from "react";
-import { TextField } from "@mui/material";
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
-import MarkerStatic from "./map-components/MarkerStatic";
-import GoOnWalkSearchBar from "./map/GoOnWalkSearchBar";
+import MarkerStatic from "../markers/MarkerStatic";
+import GoOnWalkSearchBar from "./GoOnWalkSearchBar";
 
 // when no markers are provided, the map will be centered so that the whole world is visible
 const defaultCenter = {lat: 45, lng: 0};
 // 'travel' map style; disable map type switch buttons
 const options = {mapId: "77ee2dda51aa3d0d", mapTypeControl: false};
 
-export default function Home() {
+export default function HomeGoOnWalk() {
     const {isLoaded} = useJsApiLoader({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     });
 
     const [error, setError] = useState(false);
@@ -47,11 +46,6 @@ export default function Home() {
         return <></>
 
     return <>
-        {/* <TextField 
-            label="Search Field" 
-            type="search" 
-            onChange={event => setSearchQuery(event.target.value)} 
-            value={searchQuery} /> */}
         <GoOnWalkSearchBar
             onSearchChange={handlSearchQuerryChange}
             onVerifiedChange={handleVerifiedChange}
