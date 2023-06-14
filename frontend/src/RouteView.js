@@ -10,7 +10,7 @@ const options = {mapId: "77ee2dda51aa3d0d", mapTypeControl: false};
 
 export default function RouteView({ routeId }) {
     const {isLoaded} = useJsApiLoader({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        googleMapsApiKey: ,
     });
 
     const [error, setError] = useState(false);
@@ -20,7 +20,6 @@ export default function RouteView({ routeId }) {
 
     const markers = attractions.map(attraction =>
         <MarkerStatic key={attraction.id} lat={attraction.latitude} lng={attraction.longitude} title={attraction.name} map={map} />);
-
     useEffect(() => {
         fetch('http://localhost:8000/route/detail/' + routeId + '/').
         then(data => data.json()).
@@ -28,10 +27,10 @@ export default function RouteView({ routeId }) {
         catch(error => setError(error));
 
         // fetch the associated attractions
-        fetch('http://localhost:8000/attraction/list/?isWithin__route_id=' + routeId, {method: 'GET', credentials: 'include'}).
-        then(data => data.json()).
-        then(data => setAttractions(data.results)).
-        catch(error => setError(error));
+        // fetch('http://localhost:8000/attraction/list/?isWithin__route_id=' + routeId, {method: 'GET', credentials: 'include'}).
+        // then(data => data.json()).
+        // then(data => setAttractions(data.results)).
+        // catch(error => setError(error));
     }, []);
 
     if (error)
@@ -46,8 +45,13 @@ export default function RouteView({ routeId }) {
         </div>
 
         {!isLoaded ? "" :
-            <GoogleMap zoom={3.35} center={defaultCenter} mapContainerClassName="map-container" options={options} onLoad={map => setMap(map)}>
-                {markers}
+            <GoogleMap 
+                zoom={3.35} 
+                center={defaultCenter} 
+                mapContainerClassName="map-container" 
+                options={options} 
+                onLoad={map => setMap(map)}>
+                    {markers}
             </GoogleMap>
         }
     </>;
