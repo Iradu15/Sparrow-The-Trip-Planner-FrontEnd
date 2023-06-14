@@ -1,9 +1,46 @@
 import "../assets/CSS/general-style.css";
 import "./SideMenu.css";
+import React, { useState , useEffect} from "react";
 
 export default function SideMenu({title, publicationDate, author, description, attractions}){
+    const [x, setX] = useState(window.innerWidth / 2);
+    const [y, setY] = useState(window.innerHeight / 2);
+
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const handleToggleMenu = () => {
+        setIsExpanded(!isExpanded);
+    };
+    
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+          if (!isExpanded) {
+            setY(e.pageY);
+          }
+        };
+    
+        window.addEventListener("mousemove", handleMouseMove);
+    
+        return () => {
+          window.removeEventListener("mousemove", handleMouseMove);
+        };
+    }, [isExpanded]);
+    
+
+    const hamburgerStyle = {
+        transform: `translateY(${y}px)`, // Update the translateY property to move the hamburger vertically
+    };
+
     return (
-        <div className="side__menu">
+        <div 
+        className={`side__menu ${isExpanded ? "expanded" : ""}`}>
+            
+            <div className="hamburger" style = {hamburgerStyle} onClick={handleToggleMenu}>
+                <div className="line"></div>
+                <div className="line"></div>
+                <div className="line"></div>
+		    </div>
+
             <div className="btn__wrapper">
                 <div className="btn btn__edit">Edit</div>
                 <div className="btn btn__delete">Delete</div>

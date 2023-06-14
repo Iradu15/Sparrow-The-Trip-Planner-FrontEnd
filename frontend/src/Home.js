@@ -7,7 +7,7 @@ import MarkerStatic from "./map-components/MarkerStatic";
 // when no markers are provided, the map will be centered so that the whole world is visible
 const defaultCenter = {lat: 45, lng: 0};
 // 'travel' map style; disable map type switch buttons
-const options = {mapId: "77ee2dda51aa3d0d", mapTypeControl: false};
+const options = {mapId: "27483bc3232d80b0", mapTypeControl: false};
 
 // the setMarker prop should be provided only in the context of a map from which input is expected (e.g. add attraction);
 // for purely output-generating maps (all others), when no markers are provided, it is appropriate for the map to go
