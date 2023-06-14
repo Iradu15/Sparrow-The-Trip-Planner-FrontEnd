@@ -19,14 +19,24 @@ const MainPage = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [isSignup, setIsSignup] = useState(false);
   
+  const handleLogout = () => {
+    // Perform logout logic
+    isLoggedIn = false;
+    credentials = null;
+    setSuccessMessage("Logout successful!");
+    setShowSuccess(true);
+  };
+
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      console.log("isLoggedIn", isLoggedIn)
+      console.log("isSignup",isSignup)
       // Perform signup logic
       if (isSignup) {
-        const response = await axios.post("http://127.0.0.1:8000/member/list/", {
+          const response = await axios.post("http://127.0.0.1:8000/member/list/", {
           baseUser: {
             username,
             password,
@@ -39,7 +49,6 @@ const MainPage = () => {
         });
         // Store signup data securely
         //await Keychain.setGenericPassword(username, password);
-        credentials = {username, password}
         setSuccessMessage("SignUp successful!");
       } 
       else {
@@ -49,6 +58,7 @@ const MainPage = () => {
           password,
         });
         isLoggedIn = true;
+        console.log("isLoggedIn")
         // Store login data securely
         //await Keychain.setGenericPassword(username, password);
         credentials = {username, password}
@@ -103,71 +113,83 @@ const MainPage = () => {
 
 
       <div className="form-container">
-
-        <Paper elevation={3} sx={{ padding: "2rem" }}>
-          <Typography variant="h2">{isSignup ? "Sign Up" : "Login"}</Typography>
-          {error && <Typography color="error">{error}</Typography>}
-          <form onSubmit={handleFormSubmit}>
-            <TextField
-              type="text"
-              label="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              sx={{ marginBottom: "1rem" }}
-            />
-            <TextField
-              type="password"
-              label="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              sx={{ marginBottom: "1rem" }}
-            />
-            {isSignup && (
-              <>
-                <TextField
-                  type="password"
-                  label="Confirm Password"
-                  value={passwordCheck}
-                  onChange={(e) => setPasswordCheck(e.target.value)}
-                  sx={{ marginBottom: "1rem" }}
-                />
-                <TextField
-                  type="email"
-                  label="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  sx={{ marginBottom: "1rem" }}
-                />
-                <TextField
-                  type="text"
-                  label="First name"
-                  value={first_name}
-                  onChange={(e) => setFirst_name(e.target.value)}
-                  sx={{ marginBottom: "1rem" }}
-                />
-                <TextField
-                  type="text"
-                  label="Last name"
-                  value={last_name}
-                  onChange={(e) => setLast_name(e.target.value)}
-                  sx={{ marginBottom: "1rem" }}
-                />
-              </>
-            )}
-
-            <Button variant="contained" type="submit">
-              {isSignup ? "Sign Up" : "Login"}
-            </Button>
-            </form>
+        {isLoggedIn ?
+          (
+            <Paper elevation={3} sx={{ padding: "2rem" }}>
+              <Typography variant="h2">Logout</Typography>
+              <Button variant="contained" onClick={handleLogout}>
+                Logout
+              </Button>
+            </Paper>
+          ):
+          (
+            <Paper elevation={3} sx={{ padding: "2rem" }}>
+            <Typography variant="h2">{isSignup ? "Sign Up" : "Login"}</Typography>
             
-          <Typography>
-            {isSignup ? "Already have an account? " : "Don't have an account? "}
-            <Link onClick={() => setIsSignup(!isSignup)}>
-              {isSignup ? "Login" : "Sign up"}
-            </Link>
-          </Typography>
-       
-        </Paper>
+            {error && <Typography color="error">{error}</Typography>}
+            <form onSubmit={handleFormSubmit}>
+              <TextField
+                type="text"
+                label="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                sx={{ marginBottom: "1rem" }}
+              />
+              <TextField
+                type="password"
+                label="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                sx={{ marginBottom: "1rem" }}
+              />
+              {isSignup && (
+                <>
+                  <TextField
+                    type="password"
+                    label="Confirm Password"
+                    value={passwordCheck}
+                    onChange={(e) => setPasswordCheck(e.target.value)}
+                    sx={{ marginBottom: "1rem" }}
+                  />
+                  <TextField
+                    type="email"
+                    label="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    sx={{ marginBottom: "1rem" }}
+                  />
+                  <TextField
+                    type="text"
+                    label="First name"
+                    value={first_name}
+                    onChange={(e) => setFirst_name(e.target.value)}
+                    sx={{ marginBottom: "1rem" }}
+                  />
+                  <TextField
+                    type="text"
+                    label="Last name"
+                    value={last_name}
+                    onChange={(e) => setLast_name(e.target.value)}
+                    sx={{ marginBottom: "1rem" }}
+                  />
+                </>
+              )}
+  
+              <Button variant="contained" type="submit">
+                {isSignup ? "Sign Up" : "Login"}
+              </Button>
+              </form>
+              
+              <Typography>
+                {isSignup ? "Already have an account? " : "Don't have an account? "}
+                <Link onClick={() => setIsSignup(!isSignup)}>
+                  {isSignup ? "Login" : "Sign up"}
+                </Link>
+              </Typography>
+          
+            </Paper>
+          )
+        }
       </div>
     </div>
 
