@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Paper, TextField, Button, Typography, Link, Snackbar } from "@mui/material";
-//import * as Keychain from "react-native-keychain";
+import logoImage from '../assets/images/logo/logo.png';
 
 export let isLoggedIn = false;
 export let credentials = null;
@@ -137,6 +137,18 @@ const MainPage = () => {
 
 
       <div className="form-container">
+
+         <img
+            src={logoImage}
+            alt="Logo"
+            style={{
+              width: "400px", // Adjust the width as per your requirements
+              display: "block", // Ensure the image is displayed as a block element
+              margin: "0 auto", // Center the image horizontally
+              marginBottom: "2rem", // Add some margin at the bottom of the image
+            }}
+          />  
+
         {isLoggedIn ?
           (
             <Paper elevation={3} sx={{ padding: "2rem" }}>
