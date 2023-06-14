@@ -19,10 +19,29 @@ const MainPage = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [isSignup, setIsSignup] = useState(false);
   
+  useEffect(() => {
+    const storedIsLoggedIn = sessionStorage.getItem("isLoggedIn");
+    const storedCredentials = sessionStorage.getItem("credentials");
+  
+    if (storedIsLoggedIn && storedCredentials) {
+      isLoggedIn = storedIsLoggedIn === "true";
+      credentials = JSON.parse(storedCredentials);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log("isLoggedIn", isLoggedIn)
+  }, [isLoggedIn]);
+
   const handleLogout = () => {
     // Perform logout logic
     isLoggedIn = false;
     credentials = null;
+
+    // Clear the stored login state from sessionStorage
+    sessionStorage.removeItem("isLoggedIn");
+    sessionStorage.removeItem("credentials");
+
     setSuccessMessage("Logout successful!");
     setShowSuccess(true);
   };
@@ -63,6 +82,11 @@ const MainPage = () => {
         //await Keychain.setGenericPassword(username, password);
         credentials = {username, password}
         console.log(credentials)
+
+        // Store the login state in sessionStorage
+        sessionStorage.setItem("isLoggedIn", "true");
+        sessionStorage.setItem("credentials", JSON.stringify(credentials));
+
         setSuccessMessage("Login successful!");
       }
 

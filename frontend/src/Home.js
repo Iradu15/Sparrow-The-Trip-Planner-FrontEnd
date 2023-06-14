@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
 import MarkerStatic from "./map-components/MarkerStatic";
 import GoOnWalkSearchBar from "./map/GoOnWalkSearchBar";
-import { isLoggedIn, credentials } from "./components/MainPage2";
+import { isLoggedIn, credentials } from "./components/MainPage";
 
 // when no markers are provided, the map will be centered so that the whole world is visible
 const defaultCenter = { lat: 45, lng: 0 };
@@ -21,6 +21,20 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isVerified, setIsVerified] = useState(false);
   const [routes, setRoutes] = useState([]);
+
+  useEffect(() => {
+    console.log("isLoggedIn", isLoggedIn)
+  }, [isLoggedIn]);
+
+  // useEffect(() => {
+  //   const storedIsLoggedIn = sessionStorage.getItem("isLoggedIn");
+  //   const storedCredentials = sessionStorage.getItem("credentials");
+  
+  //   if (storedIsLoggedIn && storedCredentials) {
+  //     isLoggedIn = storedIsLoggedIn === "true";
+  //     credentials = JSON.parse(storedCredentials);
+  //   }
+  // }, []);
 
   const handleSearchQueryChange = (value) => {
     setSearchQuery(value);
