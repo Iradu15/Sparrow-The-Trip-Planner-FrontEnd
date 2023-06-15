@@ -9,8 +9,10 @@
 .side__menu {
     height: 100%;
     position: fixed;
-    background-color: var(--dark-bg-color);
-    width: 360px;
+    background-color: #111420;
+    background-size: cover;
+    background-position: center;
+    width: 380px;
     transition: 1000ms all cubic-bezier(0.19, 1, 0.22, 1);
     transform: translateX(-100%);
     left: 60px;
@@ -22,7 +24,8 @@
 }
 
 .side__menu::-webkit-scrollbar {
-    width: 8px; 
+    width: 8px;
+    pointer-events: none;
 }
 
 .side__menu::-webkit-scrollbar-track {
@@ -39,7 +42,7 @@
 }
 
 .hamburger {
-    right: 0.1rem;
+    right: 0.5rem;
     position: absolute;
     width: 20px;
     height: 20px;
@@ -88,7 +91,7 @@
   touch-action: manipulation;
 
   margin-top: 1rem;
-  margin-left: 1rem;
+  margin-right: 1rem;
   margin-bottom: 2rem;
 }
 
@@ -105,18 +108,20 @@
 }
 
 .btn__edit{ color: var(--orange); border: 3px solid var(--orange); }
-.btn__edit:hover{ background: var(--yellow); color: var(--dark-bg-color); }
+.btn__edit:hover{ background: var(--yellow); color: #111420; }
 
 .btn__delete{ color: var(--red); border: 3px solid var(--red); }
-.btn__delete:hover{ background: var(--red); color: var(--dark-bg-color); }
+.btn__delete:hover{ background: var(--red); color: #111420; }
 
-/* Router informations */
-.route__title{
+
+.route__title {
     text-transform: uppercase;
     font-weight: 600;
-    color: var(--black);
+    margin-top: 1rem;
     margin-bottom: 2rem;
-    font-family: "Open Sans", sans-serif bold;
+    font-family: "Open Sans", sans-serif;
+
+    color: #fff;
 }
 
 .route__publication{
@@ -133,18 +138,87 @@
     margin-bottom: 2rem;
     font-size: 0.8rem;
     font-family: "Open Sans", sans-serif;
+    margin-bottom: 2rem;
 }
 
+#monitor {
+	background: #000; 
+	position: relative;
+	border-top: 3px solid #888; 
+	margin: 5%;
+	padding: 2% 2% 4% 2%; 
+	border-radius: 10px; 
+	border-bottom-left-radius: 50% 2%; 
+	border-bottom-right-radius: 50% 2%; 
+	transition: margin-right 1s;
+}
+
+#monitor:after {
+	content: '';
+	display: block;
+	position: absolute;
+	bottom: 3%;
+	left: 36%;
+	height: .5%; 
+	width: 28%;
+	background: #ddd; 
+	border-radius: 50%; 
+	box-shadow: 0 0 3px 0 white; 
+}
+
+#monitorscreen {
+	position: relative;
+  background-color: #777;
+  background-size: cover;
+  background-position: center;
+
+	background-size: cover; 
+	background-position: top center;
+	height: 0; 
+	padding-bottom: 56.25%; 
+	position: relative;
+	overflow: hidden;
+}
+
+
+@media all and (min-width: 960px) {
+    #monitor {
+      -webkit-animation: tvflicker .2s infinite alternate; 
+      -moz-animation:    tvflicker .5s infinite alternate; 
+      -o-animation:      tvflicker .5s infinite alternate; 
+      animation:         tvflicker .5s infinite alternate; 
+    }
+
+    @-webkit-keyframes tvflicker {
+      0%   { box-shadow: 0 0 100px 0 rgba(200,235,255,0.4); }
+      100% { box-shadow: 0 0 95px 0 rgba(200,230,255,0.45); }
+    }
+    @-moz-keyframes tvflicker {
+      0%   { box-shadow: 0 0 100px 0 rgba(225,235,255,0.4); }
+      100% { box-shadow: 0 0 60px 0 rgba(200,220,255,0.6); }
+    }
+    @-o-keyframes tvflicker {
+      0%   { box-shadow: 0 0 100px 0 rgba(225,235,255,0.4); }
+      100% { box-shadow: 0 0 60px 0 rgba(200,220,255,0.6); }
+    }
+    @keyframes tvflicker {
+      0%   { box-shadow: 0 0 100px 0 rgba(225,235,255,0.4); }
+      100% { box-shadow: 0 0 60px 0 rgba(200,220,255,0.6); }
+    }
+}
 /* Attraction card */
 .attraction{
     background-color:hsla(5,15%,29%,1);
-    background-image:
+    /* background-image:
         radial-gradient(at 99% 27%, hsla(2,17%,69%,0.44) 0px, transparent 50%),
         radial-gradient(at 0% 29%, hsla(0,42%,51%,0.75) 0px, transparent 50%),
         radial-gradient(at 83% 72%, hsla(2,17%,69%,0.44) 0px, transparent 50%),
         radial-gradient(at 20% 50%, hsla(2,17%,69%,0.44) 0px, transparent 50%),
         radial-gradient(at 63% 0%, hsla(0,42%,51%,0.75) 0px, transparent 50%),
-        radial-gradient(at 39% 99%, hsla(0,42%,51%,0.64) 0px, transparent 50%);
+        radial-gradient(at 39% 99%, hsla(0,42%,51%,0.64) 0px, transparent 50%); */
+    background-image: url("../assets/images/sidebar/purici5.jpg");
+    background-size: cover;
+    background-position: center;
 
     display: flex;
     flex-direction: column;
@@ -158,9 +232,16 @@
     background: var(--main-color);
     padding: 1rem;
     border-top-right-radius: 50px;
-    transition: 0.4s;
+    transition: 0.2s;
     color: var(--white);
     font-family: "Open Sans", sans-serif;
+
+    background: rgba(255, 255, 255, 0.09);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 

@@ -1,8 +1,8 @@
 import "../assets/CSS/general-style.css";
 import "./SideMenu.css";
 import React, { useState , useEffect} from "react";
-import arrowDownImage from "../assets/images/arrows/arrow-down.png";
-import arrowUpImage from "../assets/images/arrows/arrow-up.png";
+import arrowDownImage from "../assets/images/arrows/arrow-down(1).png";
+import arrowUpImage from "../assets/images/arrows/arrow-up(1).png";
 
 
 export default function SideMenu({title, publicationDate, author, description, attractions}){
@@ -20,7 +20,9 @@ export default function SideMenu({title, publicationDate, author, description, a
     useEffect(() => {
         const handleMouseMove = (e) => {
             setPrevY(y);
-            setY(e.pageY); 
+            if(!isExpanded)
+                setY(e.pageY);
+            
         };
 
         window.addEventListener("mousemove", handleMouseMove);
@@ -58,35 +60,55 @@ export default function SideMenu({title, publicationDate, author, description, a
             </div>
 
             <div className="route__informations">
-                <h5 className="route__publication">{publicationDate} - {author}</h5>
                 <h1 className="route__title">{title}</h1>
+                <h5 className="route__publication">{publicationDate} - {author}</h5>
                 <p className="route__description">{description}</p>
 
             </div>
 
             <div className="attractions">
-                <div className="attraction">
-                    <div className="attraction-inner">
-                        <h3 className="attraction__title">Title</h3>
-                        <p className="attraction__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum autem vel nobis odit at nemo!</p>
+                <div id="container">
+                    <div id="monitor">
+    
+                        <div className="attraction">
+                            <div className="attraction-inner">
+                                <h3 className="attraction__title">Title</h3>
+                                <p className="attraction__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum autem vel nobis odit at nemo!</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="attraction">
-                    <div className="attraction-inner">
-                        <h3 className="attraction__title">Title</h3>
-                        <p className="attraction__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum autem vel nobis odit at nemo!</p>
+                <div id="container">
+                    <div id="monitor">
+    
+                        <div className="attraction">
+                            <div className="attraction-inner">
+                                <h3 className="attraction__title">Title</h3>
+                                <p className="attraction__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum autem vel nobis odit at nemo!</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="attraction">
-                    <div className="attraction-inner">
-                        <h3 className="attraction__title">Title</h3>
-                        <p className="attraction__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum autem vel nobis odit at nemo!</p>
+                <div id="container">
+                    <div id="monitor">
+    
+                        <div className="attraction">
+                            <div className="attraction-inner">
+                                <h3 className="attraction__title">Title</h3>
+                                <p className="attraction__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum autem vel nobis odit at nemo!</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="attraction">
-                    <div className="attraction-inner">
-                        <h3 className="attraction__title">Title</h3>
-                        <p className="attraction__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum autem vel nobis odit at nemo!</p>
+                <div id="container">
+                    <div id="monitor">
+    
+                        <div className="attraction">
+                            <div className="attraction-inner">
+                                <h3 className="attraction__title">Title</h3>
+                                <p className="attraction__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum autem vel nobis odit at nemo!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum autem vel nobis odit at nemo!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum autem vel nobis odit at nemo!</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
