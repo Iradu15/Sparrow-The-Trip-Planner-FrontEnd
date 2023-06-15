@@ -1,0 +1,89 @@
+.side__menu{
+    background: var(--dark-bg-color);
+    padding: 2rem;
+    height: 100vh;
+    width: 25vw;
+    overflow-y: scroll;
+}
+
+/* Buttons --> edit and delete */
+.btn__wrapper{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 5vw;
+
+    text-transform: uppercase;
+    font-weight: 600;
+
+    letter-spacing: 2px;
+    padding: 0.25rem;
+    margin-right: 10px;
+}
+
+.btn__edit{ color: var(--yellow); border: 3px solid var(--yellow); }
+.btn__edit:hover{ background: var(--yellow); color: var(--dark-bg-color); }
+
+.btn__delete{ color: var(--red); border: 3px solid var(--red); }
+.btn__delete:hover{ background: var(--red); color: var(--dark-bg-color); }
+
+/* Router informations */
+.route__title{
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 2rem;
+    color: var(--black);
+}
+
+.route__publication{
+    text-transform: uppercase;
+    color: rgb(171, 171, 171);
+    margin-bottom: 2rem;
+}
+
+.route__description{
+    color: white;
+    line-height: 1.35;
+    margin-bottom: 2rem;
+}
+
+/* Attraction card */
+.attraction{
+    background-color:hsla(5,15%,29%,1);
+    background-image:
+        radial-gradient(at 99% 27%, hsla(2,17%,69%,0.44) 0px, transparent 50%),
+        radial-gradient(at 0% 29%, hsla(0,42%,51%,0.75) 0px, transparent 50%),
+        radial-gradient(at 83% 72%, hsla(2,17%,69%,0.44) 0px, transparent 50%),
+        radial-gradient(at 20% 50%, hsla(2,17%,69%,0.44) 0px, transparent 50%),
+        radial-gradient(at 63% 0%, hsla(0,42%,51%,0.75) 0px, transparent 50%),
+        radial-gradient(at 39% 99%, hsla(0,42%,51%,0.64) 0px, transparent 50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    min-height: 200px;
+    margin-bottom: 1rem;
+}
+
+.attraction-inner{
+    background: var(--main-color);
+    padding: 1rem;
+    border-top-right-radius: 50px;
+    transition: 0.4s;
+    color: var(--white);
+}
+
+.attraction__description{
+    display: none;
+    margin-bottom: 0;
+}
+
+.attraction-inner:hover .attraction__description{
+    display: block;
+}

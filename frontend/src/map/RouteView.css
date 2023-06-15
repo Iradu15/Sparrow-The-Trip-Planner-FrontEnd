@@ -1,0 +1,3 @@
+.route-view__wrapper{ display: flex;}
+.route-view__menu{ flex: 1; }
+.route-view__map{ flex: 4;}
