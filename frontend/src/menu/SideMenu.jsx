@@ -1,8 +1,12 @@
 import "../assets/CSS/general-style.css";
 import "./SideMenu.css";
-import { isLoggedIn, credentials } from "../components/MainPage";
+
 
 export default function SideMenu({ title, publicationDate, description, attractions }) {
+
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const credentials = JSON.parse(localStorage.getItem('credentials'));
+
   return (
     <>
       <div className="side__menu">

@@ -1,7 +1,6 @@
 import "../assets/CSS/general-style.css";
 import { useState, useEffect } from "react";
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
-import { isLoggedIn, credentials } from "../components/MainPage";
 import MarkerLink from "../markers/MarkerLink";
 import GoOnWalkSearchBar from "./GoOnWalkSearchBar";
 
@@ -9,6 +8,9 @@ import GoOnWalkSearchBar from "./GoOnWalkSearchBar";
 const defaultCenter = { lat: 45, lng: 0 };
 // 'travel' map style; disable map type switch buttons
 const options = { mapId: "77ee2dda51aa3d0d", mapTypeControl: false };
+
+const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+const credentials = JSON.parse(localStorage.getItem('credentials'));
 
 export default function Home() {
   const { isLoaded } = useJsApiLoader({

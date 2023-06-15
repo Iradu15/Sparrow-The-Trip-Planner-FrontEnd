@@ -4,18 +4,18 @@ import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
 import MarkerStatic from "../markers/MarkerStatic";
 import SideMenu from "../menu/SideMenu";
 import { useParams } from "react-router-dom";
-import { isLoggedIn, credentials } from "../components/MainPage";
 
 // when no markers are provided, the map will be centered so that the whole world is visible
 const defaultCenter = {lat: 45, lng: 0};
 // 'travel' map style; disable map type switch buttons
 const options = {mapId: "77ee2dda51aa3d0d", mapTypeControl: false};
 
+
 export default function RouteView() {
   const { routeId } = useParams();
-  useEffect(() => {
-    console.log("routeId", routeId)
-  }, [routeId]);
+  // useEffect(() => {
+  //   console.log("routeId", routeId)
+  // }, [routeId]);
 
     const {isLoaded} = useJsApiLoader({
         googleMapsApiKey: "AIzaSyDDSZwOALrOAUzlAspZcreypL-i1ewGXWE",
@@ -26,23 +26,12 @@ export default function RouteView() {
     const [route, setRoute] = useState({});
     const [attractions, setAttractions] = useState([]);
 
-    let markers = null;
-    if (map && attractions && attractions.length > 0) {
-      markers = attractions.map((attraction) => (
-        <MarkerStatic
-          key={attraction.id}
-          lat={attraction.latitude}
-          lng={attraction.longitude}
-          title={attraction.name}
-          map={map}
-        />
-      ));
-    }
-
-    // const markers = attractions.map(attraction =>
-    //     <MarkerStatic key={attraction.id} lat={attraction.latitude} lng={attraction.longitude} title={attraction.name} map={map} />);
-   
+    
     useEffect(() => {
+
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      const credentials = JSON.parse(localStorage.getItem('credentials'));
+
       if(isLoggedIn){
       
         const credentialsString = `${credentials.username}:${credentials.password}`;
@@ -63,6 +52,18 @@ export default function RouteView() {
       console.log("isLoggedIn", isLoggedIn)
     }, []);
     
+    let markers = null;
+    if (map && attractions && attractions.length > 0) {
+      markers = attractions.map((attraction) => (
+        <MarkerStatic
+          key={attraction.id}
+          lat={attraction.latitude}
+          lng={attraction.longitude}
+          title={attraction.name}
+          map={map}
+        />
+      ));
+    }
 
     if (error)
         return <></>;
