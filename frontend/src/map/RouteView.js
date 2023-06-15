@@ -12,11 +12,11 @@ const options = {mapId: "77ee2dda51aa3d0d", mapTypeControl: false};
 
 
 export default function RouteView() {
-  const { routeId } = useParams();
-  // useEffect(() => {
-  //   console.log("routeId", routeId)
-  // }, [routeId]);
-
+    const { routeId } = useParams();
+    useEffect(() => {
+      console.log("routeId", routeId)
+    }, [routeId]);
+  
     const {isLoaded} = useJsApiLoader({
         googleMapsApiKey: "AIzaSyDDSZwOALrOAUzlAspZcreypL-i1ewGXWE",
     });
@@ -26,11 +26,15 @@ export default function RouteView() {
     const [route, setRoute] = useState({});
     const [attractions, setAttractions] = useState([]);
 
+    useEffect(() => {
+      console.log("attractions", attractions)
+    }, [attractions]);
     
     useEffect(() => {
 
       const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
       const credentials = JSON.parse(localStorage.getItem('credentials'));
+      console.log("credentials", credentials)
 
       if(isLoggedIn){
       
@@ -44,7 +48,7 @@ export default function RouteView() {
 
         // fetch the associated attractions
         fetch('http://localhost:8000/attraction/list/?isWithin__route_id=' + routeId, {headers: {
-          // Authorization: `Basic ${encodedCredentials}`,
+          Authorization: `Basic ${encodedCredentials}`,
         },}).then(data => data.json()).
         then(data => setAttractions(data.results)).
         catch(error => setError(error));
@@ -53,7 +57,7 @@ export default function RouteView() {
     }, []);
     
     let markers = null;
-    if (map && attractions && attractions.length > 0) {
+    if (isLoaded && map && attractions && attractions.length > 0) {
       markers = attractions.map((attraction) => (
         <MarkerStatic
           key={attraction.id}
@@ -68,17 +72,19 @@ export default function RouteView() {
     if (error)
         return <></>;
 
+    
     return <>
         <div class="route-view__wrapper">
-            <div class="route-view__menu">
-                <SideMenu 
-                    title={route.title}
-                    publicationDate={route.publicationDate}
-                    description={route.description}
-                    attractions={attractions}
-                >
-                </SideMenu>
+          {attractions && attractions.length > 0 && (
+            <div className="route-view__menu">
+              <SideMenu
+                title={route.title}
+                publicationDate={route.publicationDate}
+                description={route.description}
+                attractions={attractions}
+              />
             </div>
+          )}
 
             <div class="route-view__map">
                 {!isLoaded ? "" :
