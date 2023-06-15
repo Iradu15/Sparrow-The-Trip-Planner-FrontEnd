@@ -4,6 +4,7 @@ import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
 import MarkerStatic from "../markers/MarkerStatic";
 import SideMenu from "../menu/SideMenu";
 import { useParams } from "react-router-dom";
+import { isLoggedIn, credentials } from "../components/MainPage";
 
 // when no markers are provided, the map will be centered so that the whole world is visible
 const defaultCenter = {lat: 45, lng: 0};
@@ -42,24 +43,26 @@ export default function RouteView() {
     //     <MarkerStatic key={attraction.id} lat={attraction.latitude} lng={attraction.longitude} title={attraction.name} map={map} />);
    
     useEffect(() => {
-      // if(isLoggedIn){
-      // const credentialsString = `${credentials.username}:${credentials.password}`;
-      // const encodedCredentials = btoa(credentialsString);
-    
-      fetch('http://localhost:8000/route/detail/' + routeId + '/', {headers: {
-        // Authorization: `Basic ${encodedCredentials}`,
-      },}).then(data => data.json()).
-      then(data => setRoute(data)).
-      catch(error => setError(error));
-
-      // fetch the associated attractions
-      fetch('http://localhost:8000/attraction/list/?isWithin__route_id=' + routeId, {headers: {
-        // Authorization: `Basic ${encodedCredentials}`,
-      },}).then(data => data.json()).
-      then(data => setAttractions(data.results)).
-      catch(error => setError(error));
+      if(isLoggedIn){
       
+        const credentialsString = `${credentials.username}:${credentials.password}`;
+        const encodedCredentials = btoa(credentialsString);
+        fetch('http://localhost:8000/route/detail/' + routeId + '/', {headers: {
+          Authorization: `Basic ${encodedCredentials}`,
+        },}).then(data => data.json()).
+        then(data => setRoute(data)).
+        catch(error => setError(error));
+
+        // fetch the associated attractions
+        fetch('http://localhost:8000/attraction/list/?isWithin__route_id=' + routeId, {headers: {
+          // Authorization: `Basic ${encodedCredentials}`,
+        },}).then(data => data.json()).
+        then(data => setAttractions(data.results)).
+        catch(error => setError(error));
+      }
+      console.log("isLoggedIn", isLoggedIn)
     }, []);
+    
 
     if (error)
         return <></>;

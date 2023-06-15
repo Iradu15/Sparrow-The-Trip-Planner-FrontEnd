@@ -72,8 +72,6 @@ const MainPage = () => {
           },
           birthDate: "09.11.1990",
         });
-        // Store signup data securely
-        //await Keychain.setGenericPassword(username, password);
         setSuccessMessage("SignUp successful!");
       } 
       else {
@@ -85,7 +83,6 @@ const MainPage = () => {
         isLoggedIn = true;
         console.log("isLoggedIn")
         // Store login data securely
-        //await Keychain.setGenericPassword(username, password);
         credentials = {username, password}
         console.log(credentials)
 
