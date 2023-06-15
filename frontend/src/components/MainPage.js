@@ -1,3 +1,5 @@
+import "./LogSign.css";
+import "../assets/CSS/general-style.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Paper, TextField, Button, Typography, Link, Snackbar } from "@mui/material";
@@ -19,6 +21,10 @@ const MainPage = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [isSignup, setIsSignup] = useState(false);
   
+  const inputStyle = {
+    marginBottom: "1rem",
+  }
+
   useEffect(() => {
     const storedIsLoggedIn = sessionStorage.getItem("isLoggedIn");
     const storedCredentials = sessionStorage.getItem("credentials");
@@ -122,11 +128,8 @@ const MainPage = () => {
 
 
   return (
-    <div className="login-page">
-      <div className="description">
-        <h2>Welcome to the App!</h2>
-        <p>This is a description of the app.</p>
-      </div>
+    <div className="login-page__wrapper">
+      <div className="login-page__left"></div>
 
         <div> <Snackbar
             open={showSuccess}
@@ -136,18 +139,7 @@ const MainPage = () => {
         /></div>
 
 
-      <div className="form-container">
-
-         <img
-            src={logoImage}
-            alt="Logo"
-            style={{
-              width: "400px", // Adjust the width as per your requirements
-              display: "block", // Ensure the image is displayed as a block element
-              margin: "0 auto", // Center the image horizontally
-              marginBottom: "2rem", // Add some margin at the bottom of the image
-            }}
-          />  
+      <div className="login-page__form-container">
 
         {isLoggedIn ?
           (
@@ -159,71 +151,106 @@ const MainPage = () => {
             </Paper>
           ):
           (
-            <Paper elevation={3} sx={{ padding: "2rem" }}>
-            <Typography variant="h2">{isSignup ? "Sign Up" : "Login"}</Typography>
-            
-            {error && <Typography color="error">{error}</Typography>}
-            <form onSubmit={handleFormSubmit}>
-              <TextField
-                type="text"
-                label="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                sx={{ marginBottom: "1rem" }}
-              />
-              <TextField
-                type="password"
-                label="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                sx={{ marginBottom: "1rem" }}
-              />
-              {isSignup && (
-                <>
-                  <TextField
-                    type="password"
-                    label="Confirm Password"
-                    value={passwordCheck}
-                    onChange={(e) => setPasswordCheck(e.target.value)}
-                    sx={{ marginBottom: "1rem" }}
-                  />
-                  <TextField
-                    type="email"
-                    label="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    sx={{ marginBottom: "1rem" }}
-                  />
-                  <TextField
-                    type="text"
-                    label="First name"
-                    value={first_name}
-                    onChange={(e) => setFirst_name(e.target.value)}
-                    sx={{ marginBottom: "1rem" }}
-                  />
-                  <TextField
-                    type="text"
-                    label="Last name"
-                    value={last_name}
-                    onChange={(e) => setLast_name(e.target.value)}
-                    sx={{ marginBottom: "1rem" }}
-                  />
-                </>
-              )}
-  
-              <Button variant="contained" type="submit">
-                {isSignup ? "Sign Up" : "Login"}
-              </Button>
-              </form>
+            <div>
+              <div class="login-page__welcome">
+                <h1>Hey, hello! 👋</h1>
+                <h5>
+                  {
+                    isSignup ? "let's sign you up" 
+                    : "let's log you in"
+                  }
+                </h5>
+              </div>
               
-              <Typography>
-                {isSignup ? "Already have an account? " : "Don't have an account? "}
-                <Link onClick={() => setIsSignup(!isSignup)}>
-                  {isSignup ? "Login" : "Sign up"}
-                </Link>
-              </Typography>
-          
-            </Paper>
+              {error && <Typography color="error">{error}</Typography>}
+              <form class="login_page__form" onSubmit={handleFormSubmit}>
+                {!isSignup && (
+                  <>
+                    <TextField
+                      type="text"
+                      label="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      style={inputStyle}
+                    />
+                    <TextField
+                      type="password"
+                      label="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      style={inputStyle}
+                    />
+                  </>                  
+                )}
+                {isSignup && (
+                  <>
+                    <TextField
+                      type="text"
+                      label="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      style={inputStyle}
+                    />
+                    <div class="login-page__input-wrapper">
+                      <TextField
+                        type="text"
+                        label="First name"
+                        value={first_name}
+                        onChange={(e) => setFirst_name(e.target.value)}
+                        style={inputStyle}
+                      />
+                      <TextField
+                        type="text"
+                        label="Last name"
+                        value={last_name}
+                        onChange={(e) => setLast_name(e.target.value)}
+                        style={inputStyle}
+                      />
+                    </div>
+                    <div class="login-page__input-wrapper">
+                      <TextField
+                        type="password"
+                        label="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        style={inputStyle}
+                      />
+                      <TextField
+                        type="password"
+                        label="Confirm Password"
+                        value={passwordCheck}
+                        onChange={(e) => setPasswordCheck(e.target.value)}
+                        style={inputStyle}
+                      />
+                    </div>
+                    <TextField
+                      type="email"
+                      label="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      style={inputStyle}
+                    />
+                  </>
+                )}
+    
+                <Button 
+                  variant="contained" 
+                  type="submit"
+                  style={{backgroundColor: "#BD4949"}}
+                >
+                  {isSignup ? "Sign up" : "Log in"}
+                </Button>
+
+                <Typography
+                  style={{marginTop: "0.5rem"}}
+                >
+                  {isSignup ? "Already have an account? " : "Don't have an account? "}
+                  <Link onClick={() => setIsSignup(!isSignup)}>
+                    {isSignup ? "Log in" : "Sign up"}
+                  </Link>
+                </Typography>
+                </form>
+            </div>
           )
         }
       </div>

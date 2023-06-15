@@ -1,10 +1,9 @@
-import "./assets/CSS/general-style.css";
+import "../assets/CSS/general-style.css";
 import { useState, useEffect } from "react";
-import { TextField } from "@mui/material";
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
-import MarkerStatic from "./map-components/MarkerStatic";
-import GoOnWalkSearchBar from "./map/GoOnWalkSearchBar";
-import { isLoggedIn, credentials } from "./components/MainPage";
+import { isLoggedIn, credentials } from "../components/MainPage";
+import MarkerStatic from "../markers/MarkerStatic";
+import GoOnWalkSearchBar from "./GoOnWalkSearchBar";
 
 // when no markers are provided, the map will be centered so that the whole world is visible
 const defaultCenter = { lat: 45, lng: 0 };
@@ -64,13 +63,10 @@ export default function Home() {
           },
         }
       )
-        .then((data) => data.json())
-        .then((data) => setRoutes(data.results))
-        .catch((error) => setError(error));
-        console.log('fetch ok, logged in')
+      .then((data) => data.json())
+      .then((data) => setRoutes(data.results))
+      .catch((error) => setError(error));
     } else {
-      console.log(isLoggedIn)
-      console.log('routes [] for else')
       setRoutes([]);
     }
   };

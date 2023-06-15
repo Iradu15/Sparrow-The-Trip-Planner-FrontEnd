@@ -1,0 +1,22 @@
+.navigation__bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: var(--black);
+    padding: 1rem 1rem;
+}
+
+#navigation__logo{ width: 150px; }
+.navigation__links{ display: flex; }
+
+.navigation__link a{
+    margin-right: 3rem;
+    color:var(--white);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.navigation__link a:last-child{
+    margin-right: 0px;
+}
