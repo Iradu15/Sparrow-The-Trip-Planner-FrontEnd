@@ -39,7 +39,7 @@
 }
 
 .hamburger {
-    right: 0.01rem;
+    right: 0.1rem;
     position: absolute;
     width: 20px;
     height: 20px;
@@ -70,21 +70,41 @@
     justify-content: flex-end;
 }
 
-.btn{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 5vw;
 
-    text-transform: uppercase;
-    font-weight: 600;
+.btn {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 
-    letter-spacing: 2px;
-    padding: 0.25rem;
-    margin-right: 10px;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 2rem;
 }
 
-.btn__edit{ color: var(--yellow); border: 3px solid var(--yellow); }
+.btn:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .btn {
+    padding: 0.25em 0.75em;
+  }
+}
+
+.btn__edit{ color: var(--orange); border: 3px solid var(--orange); }
 .btn__edit:hover{ background: var(--yellow); color: var(--dark-bg-color); }
 
 .btn__delete{ color: var(--red); border: 3px solid var(--red); }
@@ -96,6 +116,7 @@
     font-weight: 600;
     color: var(--black);
     margin-bottom: 2rem;
+    font-family: "Open Sans", sans-serif bold;
 }
 
 .route__publication{
@@ -103,6 +124,7 @@
     color: rgb(171, 171, 171);
     font-size: 0.7rem;
     margin-top: 1rem;
+    font-family: "Open Sans", sans-serif;
 }
 
 .route__description{
@@ -110,6 +132,7 @@
     line-height: 1.35;
     margin-bottom: 2rem;
     font-size: 0.8rem;
+    font-family: "Open Sans", sans-serif;
 }
 
 /* Attraction card */
@@ -137,11 +160,14 @@
     border-top-right-radius: 50px;
     transition: 0.4s;
     color: var(--white);
+    font-family: "Open Sans", sans-serif;
 }
+
 
 .attraction__description{
     display: none;
     margin-bottom: 0;
+    font-family: "Open Sans", sans-serif;
 }
 
 .attraction-inner:hover .attraction__description{

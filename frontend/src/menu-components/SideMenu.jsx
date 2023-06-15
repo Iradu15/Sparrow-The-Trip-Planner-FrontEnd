@@ -20,7 +20,7 @@ export default function SideMenu({title, publicationDate, author, description, a
     useEffect(() => {
         const handleMouseMove = (e) => {
             setPrevY(y);
-            setY(e.pageY);  
+            setY(e.pageY); 
         };
 
         window.addEventListener("mousemove", handleMouseMove);
@@ -31,12 +31,12 @@ export default function SideMenu({title, publicationDate, author, description, a
     }, [isExpanded, y]);
 
     useEffect(() => {
+
         if (prevY < y) {
           setDirection("down");
           setHamburgerImage(arrowDownImage);
         }
         if (prevY > y) {
-            
           setDirection("up");
           setHamburgerImage(arrowUpImage);
         }
