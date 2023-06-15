@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
 import MarkerStatic from "../markers/MarkerStatic";
 import SideMenu from "../menu/SideMenu";
+import { useParams } from "react-router-dom";
 
 // when no markers are provided, the map will be centered so that the whole world is visible
 const defaultCenter = {lat: 45, lng: 0};
@@ -25,7 +26,7 @@ export default function RouteView() {
     const [attractions, setAttractions] = useState([]);
 
     let markers = null;
-    if (map && attractions.length > 0) {
+    if (map && attractions && attractions.length > 0) {
       markers = attractions.map((attraction) => (
         <MarkerStatic
           key={attraction.id}
@@ -37,7 +38,7 @@ export default function RouteView() {
       ));
     }
 
-    // const markers = attractions.map(attractions =>
+    // const markers = attractions.map(attraction =>
     //     <MarkerStatic key={attraction.id} lat={attraction.latitude} lng={attraction.longitude} title={attraction.name} map={map} />);
    
     useEffect(() => {

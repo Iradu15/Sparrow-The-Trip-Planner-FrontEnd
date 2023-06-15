@@ -1,7 +1,7 @@
 .side__menu{
     background: var(--dark-bg-color);
     padding: 2rem;
-    height: 100vh;
+    height: calc(100vh - 90px);
     width: 25vw;
     overflow-y: scroll;
 }

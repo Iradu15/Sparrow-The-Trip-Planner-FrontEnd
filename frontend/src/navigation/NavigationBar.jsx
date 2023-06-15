@@ -40,7 +40,7 @@ export default function NavigationBar(){
                 <Route exact path='/' element={< Home />}></Route>
                 <Route exact path='/authentication' element={< MainPage />}></Route>
                 {/* <Route exact path='/authentication2' element={< MainPage />}></Route> */}
-                <Route exact path="/route/:routeId" element={<RouteView />} />
+                <Route exact path={"/route/:routeId"} element={<RouteView />} />
                 {/* <Route exact path="/route13" element={<RouteView routeId={11} />} /> */}
             </Routes>
         </Router>

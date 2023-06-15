@@ -2,7 +2,7 @@ import "../assets/CSS/general-style.css";
 import { useState, useEffect } from "react";
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
 import { isLoggedIn, credentials } from "../components/MainPage";
-import MarkerStatic from "../markers/MarkerStatic";
+import MarkerLink from "../markers/MarkerLink";
 import GoOnWalkSearchBar from "./GoOnWalkSearchBar";
 
 // when no markers are provided, the map will be centered so that the whole world is visible
@@ -77,9 +77,11 @@ export default function Home() {
 
   let markers = null;
   if (routes && routes.length > 0 && map) {
+    console.log(routes)
     markers = routes.map((route) => (
-      <MarkerStatic
+      <MarkerLink
         key={route.id}
+        id={route.id}
         lat={route.startingPointLat}
         lng={route.startingPointLon}
         title={route.title}

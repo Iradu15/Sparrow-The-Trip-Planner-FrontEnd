@@ -1,6 +1,6 @@
 .login-page__wrapper {
     display: flex;
-    height: 100vh;
+    height: calc(100vh - 90px);
 }
   
 /* Left side of the login/sign up page */
@@ -46,6 +46,12 @@
 
 .login-page__input-wrapper{ display: flex; }
 .login-page__input-wrapper div:nth-child(1){ margin-right: 1rem; }
+
+.log-out{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .error {
     color: red;

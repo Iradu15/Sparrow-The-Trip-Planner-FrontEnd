@@ -48,7 +48,7 @@ const MainPage = () => {
     sessionStorage.removeItem("isLoggedIn");
     sessionStorage.removeItem("credentials");
 
-    setSuccessMessage("Logout successful!");
+    setSuccessMessage("Log out successful!");
     setShowSuccess(true);
   };
 
@@ -93,7 +93,7 @@ const MainPage = () => {
         sessionStorage.setItem("isLoggedIn", "true");
         sessionStorage.setItem("credentials", JSON.stringify(credentials));
 
-        setSuccessMessage("Login successful!");
+        setSuccessMessage("Log in successful!");
       }
 
       // Clear form inputs and error message
@@ -143,12 +143,21 @@ const MainPage = () => {
 
         {isLoggedIn ?
           (
-            <Paper elevation={3} sx={{ padding: "2rem" }}>
-              <Typography variant="h2">Logout</Typography>
-              <Button variant="contained" onClick={handleLogout}>
-                Logout
-              </Button>
-            </Paper>
+            <div>
+              <div class="login-page__welcome">
+                <h1>Hey, hello! 👋</h1>
+                <h5>do you want to log out?</h5>
+              </div>
+              <div class="log-out">
+                <Button 
+                  variant="contained" 
+                  onClick={handleLogout}
+                  style={{backgroundColor: "#BD4949", marginTop: "1rem"}}
+                >
+                    Log out
+                </Button>
+              </div>
+            </div>
           ):
           (
             <div>
@@ -162,7 +171,6 @@ const MainPage = () => {
                 </h5>
               </div>
               
-              {error && <Typography color="error">{error}</Typography>}
               <form class="login_page__form" onSubmit={handleFormSubmit}>
                 {!isSignup && (
                   <>
@@ -241,6 +249,8 @@ const MainPage = () => {
                   {isSignup ? "Sign up" : "Log in"}
                 </Button>
 
+
+                {error && <Typography color="error">{error}</Typography>}
                 <Typography
                   style={{marginTop: "0.5rem"}}
                 >
