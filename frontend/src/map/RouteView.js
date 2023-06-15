@@ -12,6 +12,18 @@ const options = {mapId: "77ee2dda51aa3d0d", mapTypeControl: false};
 
 
 export default function RouteView() {
+  const [isLoggedIn, setisLoggedIn] = useState(() => {
+    const storedIsLoggedIn = sessionStorage.getItem("isLoggedIn");
+    return storedIsLoggedIn === "true";
+  });
+  
+  const [credentials, setCredentials] = useState(() => {
+    const storedCredentials = sessionStorage.getItem("credentials");
+    return storedCredentials ? JSON.parse(storedCredentials) : null;
+  });
+
+  console.log("credentials before", credentials)
+
     const { routeId } = useParams();
     useEffect(() => {
       console.log("routeId", routeId)
@@ -30,16 +42,23 @@ export default function RouteView() {
       console.log("attractions", attractions)
     }, [attractions]);
     
+    
+    useEffect(() => {
+      console.log("credentials after", credentials);
+    }, [credentials]);
+
     useEffect(() => {
 
-      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-      const credentials = JSON.parse(localStorage.getItem('credentials'));
-      console.log("credentials", credentials)
+      // const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      // const credentials = JSON.parse(localStorage.getItem('credentials'));
+
+      // console.log("credentials after", credentials)
 
       if(isLoggedIn){
       
         const credentialsString = `${credentials.username}:${credentials.password}`;
         const encodedCredentials = btoa(credentialsString);
+
         fetch('http://localhost:8000/route/detail/' + routeId + '/', {headers: {
           Authorization: `Basic ${encodedCredentials}`,
         },}).then(data => data.json()).
