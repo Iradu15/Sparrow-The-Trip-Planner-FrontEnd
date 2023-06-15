@@ -7,3 +7,8 @@
     --red: #cc0000;
     --yellow: #F7DE3A;
 }
+
+.map-container {
+    width: 100%;
+    height: calc(100vh - 90px);
+}

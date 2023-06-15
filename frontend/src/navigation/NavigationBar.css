@@ -4,18 +4,20 @@
     align-items: center;
 
     background: var(--black);
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
+    height: 90px;
 }
 
 #navigation__logo{ width: 150px; }
 .navigation__links{ display: flex; }
 
-.navigation__link{
+.navigation__link a{
     margin-right: 3rem;
     color:var(--white);
     text-transform: uppercase;
+    font-weight: 600;
 }
 
-.navigation__link:last-child{
+.navigation__link a:last-child{
     margin-right: 0px;
 }

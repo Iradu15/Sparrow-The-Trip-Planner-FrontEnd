@@ -38,7 +38,7 @@ function GoOnWalkSearchBar({onSearchChange, onVerifiedChange}){
                         id="verified_route"
                         onChange={handleVerifyInputChange}
                     />
-                    Verified Route
+                    VERIFIED
                 </div>
             </div>
         </div>

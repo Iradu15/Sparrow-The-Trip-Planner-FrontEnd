@@ -1,7 +1,7 @@
 .side__menu{
     background: var(--dark-bg-color);
-    padding: 2rem;
-    height: 100vh;
+    padding: 1rem;
+    height: calc(100vh - 90px);
     width: 25vw;
     overflow-y: scroll;
 }
@@ -19,17 +19,15 @@
     min-width: 5vw;
 
     text-transform: uppercase;
-    font-weight: 600;
-
     letter-spacing: 2px;
-    padding: 0.25rem;
-    margin-right: 10px;
+    padding: 0.35rem;
+    margin-right: 5px;
 }
 
-.btn__edit{ color: var(--yellow); border: 3px solid var(--yellow); }
+.btn__edit{ color: var(--yellow); border: 2px solid var(--yellow); }
 .btn__edit:hover{ background: var(--yellow); color: var(--dark-bg-color); }
 
-.btn__delete{ color: var(--red); border: 3px solid var(--red); }
+.btn__delete{ color: var(--red); border: 2px solid var(--red); }
 .btn__delete:hover{ background: var(--red); color: var(--dark-bg-color); }
 
 /* Router informations */
@@ -73,11 +71,13 @@
 
 .attraction-inner{
     background: var(--main-color);
-    padding: 1rem;
+    padding: 0.5rem 0.5rem 0.35rem 0.5rem;
     border-top-right-radius: 50px;
     transition: 0.4s;
     color: var(--white);
 }
+
+.attraction-inner h4{margin-bottom: 0.15rem;}
 
 .attraction__description{
     display: none;

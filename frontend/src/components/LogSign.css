@@ -1,0 +1,65 @@
+.login-page__wrapper {
+    display: flex;
+    height: calc(100vh - 90px);
+}
+  
+/* Left side of the login/sign up page */
+.login-page__left{
+    background-color:hsla(5,15%,29%,1);
+    background-image:
+        radial-gradient(at 74% 66%, hsla(2,17%,69%,0.66) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, hsla(0,42%,51%,0.45) 0px, transparent 50%),
+        radial-gradient(at 28% 68%, hsla(0,42%,51%,0.68) 0px, transparent 50%),
+        radial-gradient(at 81% 0%, hsla(0,42%,51%,0.86) 0px, transparent 50%),
+        radial-gradient(at 0% 0%, hsla(2,17%,69%,0.66) 0px, transparent 50%);
+    flex: 2;
+    color: white;
+}
+  
+/* Container for the whole section */
+.login-page__form-container {
+    background-color: var(--dark-bg-color);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Welcoming text container */
+.login-page__welcome{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-page__welcome h1{ color: var(--main-color); }
+.login-page__welcome h5{ color: gray; letter-spacing: 2px;}
+
+.login_page__form{
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    color: white;
+}
+
+.login-page__input-wrapper{ display: flex; }
+.login-page__input-wrapper div:nth-child(1){ margin-right: 1rem; }
+
+.log-out{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error {
+    color: red;
+}
+  
+input {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+}
+  

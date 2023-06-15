@@ -1,65 +1,115 @@
 import "../assets/CSS/general-style.css";
 import { useState, useEffect } from "react";
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
-import MarkerStatic from "../markers/MarkerStatic";
+import { isLoggedIn, credentials } from "../components/MainPage";
+import MarkerLink from "../markers/MarkerLink";
 import GoOnWalkSearchBar from "./GoOnWalkSearchBar";
 
 // when no markers are provided, the map will be centered so that the whole world is visible
-const defaultCenter = {lat: 45, lng: 0};
+const defaultCenter = { lat: 45, lng: 0 };
 // 'travel' map style; disable map type switch buttons
-const options = {mapId: "77ee2dda51aa3d0d", mapTypeControl: false};
+const options = { mapId: "77ee2dda51aa3d0d", mapTypeControl: false };
 
-export default function HomeGoOnWalk() {
-    const {isLoaded} = useJsApiLoader({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-    });
+export default function Home() {
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: "AIzaSyDDSZwOALrOAUzlAspZcreypL-i1ewGXWE",
+  });
 
-    const [error, setError] = useState(false);
-    const [map, setMap] = useState();
-    const [searchQuery, setSearchQuery] = useState('');
-    const [isVerified, setIsVerified] = useState(false);
-    const [routes, setRoutes] = useState([]);
+  const [error, setError] = useState(false);
+  const [map, setMap] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isVerified, setIsVerified] = useState(false);
+  const [routes, setRoutes] = useState([]);
 
-    const markers = routes.map(route =>
-        <MarkerStatic key={route.id} lat={route.startingPointLat} lng={route.startingPointLon} title={route.title} map={map} />);
+  useEffect(() => {
+    console.log("isLoggedIn", isLoggedIn)
+  }, [isLoggedIn]);
 
-    const handlSearchQuerryChange = (value) => { setSearchQuery(value); }
-    const handleVerifiedChange = (value) => { setIsVerified(value); }
+  // useEffect(() => {
+  //   const storedIsLoggedIn = sessionStorage.getItem("isLoggedIn");
+  //   const storedCredentials = sessionStorage.getItem("credentials");
+  
+  //   if (storedIsLoggedIn && storedCredentials) {
+  //     isLoggedIn = storedIsLoggedIn === "true";
+  //     credentials = JSON.parse(storedCredentials);
+  //   }
+  // }, []);
 
-    // delay data fetching by 0.5s after the user stopped typing
-    useEffect(() => {
-       const timeOut = setTimeout(() => fetchRoutes(), 500);
-       return () => clearTimeout(timeOut);
-    }, [searchQuery, isVerified]);
+  const handleSearchQueryChange = (value) => {
+    setSearchQuery(value);
+  };
 
-    const fetchRoutes = () => {
-        if (searchQuery !== '')
-            fetch('http://localhost:8000/route/list/?search=' + searchQuery + '&verified=' + isVerified, {method: 'GET', credentials: 'include'}).
-            then(data => data.json()).
-            then(data => setRoutes(data.results)).
-            catch(error => setError(error));
-        else
-            setRoutes([]);
-    }
+  const handleVerifiedChange = (value) => {
+    setIsVerified(value);
+  };
 
-    if (error)
-        return <></>
+  useEffect(() => {
+    const timeout = setTimeout(fetchRoutes, 500);
+    return () => clearTimeout(timeout);
+  }, [searchQuery, isVerified]);
 
-    return <>
-        <GoOnWalkSearchBar
-            onSearchChange={handlSearchQuerryChange}
-            onVerifiedChange={handleVerifiedChange}
-        ></GoOnWalkSearchBar>
-
-        {!isLoaded ? "loading..." :
-            <GoogleMap 
-                zoom={3.35} 
-                center={defaultCenter} 
-                mapContainerClassName="map-container" 
-                options={options} 
-                onLoad={map => setMap(map)}>
-                {markers}
-            </GoogleMap>
+  const fetchRoutes = () => {
+    if (isLoggedIn && searchQuery !== "") {
+      const credentialsString = `${credentials.username}:${credentials.password}`;
+      const encodedCredentials = btoa(credentialsString);
+      
+      fetch(
+        `http://localhost:8000/route/list/?search=${searchQuery}&verified=${isVerified}`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Authorization: `Basic ${encodedCredentials}`,
+          },
         }
-    </>;
+      )
+      .then((data) => data.json())
+      .then((data) => setRoutes(data.results))
+      .catch((error) => setError(error));
+    } else {
+      setRoutes([]);
+    }
+  };
+
+  if (error) {
+    return <></>;
+  }
+
+  let markers = null;
+  if (routes && routes.length > 0 && map) {
+    console.log(routes)
+    markers = routes.map((route) => (
+      <MarkerLink
+        key={route.id}
+        id={route.id}
+        lat={route.startingPointLat}
+        lng={route.startingPointLon}
+        title={route.title}
+        map={map}
+      />
+    ));
+  }
+
+  return (
+    <>
+      <GoOnWalkSearchBar
+        onSearchChange={handleSearchQueryChange}
+        onVerifiedChange={handleVerifiedChange}
+      />
+
+      {!isLoaded ? (
+        "loading..."
+      ) : (
+        <GoogleMap
+          zoom={3.35}
+          center={defaultCenter}
+          mapContainerClassName="map-container"
+          options={options}
+          onLoad={(map) => setMap(map)}
+        >
+          {markers}
+        </GoogleMap>
+      )}
+    </>
+  );
 }
