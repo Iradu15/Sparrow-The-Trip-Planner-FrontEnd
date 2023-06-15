@@ -20,7 +20,10 @@ export default function SideMenu({title, publicationDate, description, attractio
 
                 {
                     attractions.map(attraction => (
-                        <div className="attraction">
+                        <div 
+                            className="attraction"
+                            key={attraction.id}
+                        >
                             <div className="attraction-inner">
                                 <h3 className="attraction__title">{attraction.name}</h3>
                                 <p className="attraction__description">{attraction.generalDescription}</p>
