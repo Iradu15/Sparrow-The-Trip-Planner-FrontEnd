@@ -13,7 +13,6 @@ export default function SideMenu({title, publicationDate, description, attractio
                 <h1 className="route__title">{title}</h1>
                 <h5 className="route__publication">{publicationDate}</h5>
                 <p className="route__description">{description}</p>
-
             </div>
 
             <div className="attractions">
@@ -25,7 +24,7 @@ export default function SideMenu({title, publicationDate, description, attractio
                             key={attraction.id}
                         >
                             <div className="attraction-inner">
-                                <h3 className="attraction__title">{attraction.name}</h3>
+                                <h4 className="attraction__title">{attraction.name}</h4>
                                 <p className="attraction__description">{attraction.generalDescription}</p>
                             </div>
                         </div>
