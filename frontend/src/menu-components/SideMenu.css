@@ -10,12 +10,12 @@
     height: 100%;
     position: fixed;
     background-color: var(--dark-bg-color);
-    width: 300px;
+    width: 360px;
     transition: 1000ms all cubic-bezier(0.19, 1, 0.22, 1);
     transform: translateX(-100%);
     left: 60px;
     padding-left: 1rem;
-    padding-right: 0.5rem;
+    padding-right: 1.5rem;
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: transparent transparent; 
@@ -39,7 +39,7 @@
 }
 
 .hamburger {
-    right: 20px;
+    right: 0.01rem;
     position: absolute;
     width: 20px;
     height: 20px;
@@ -52,6 +52,7 @@
     height: 4px;
     background-color: #fff;
     position: absolute;
+    margin-left: 100%;
 }
 
 .hamburger .line:nth-child(2) {
@@ -93,20 +94,22 @@
 .route__title{
     text-transform: uppercase;
     font-weight: 600;
-    margin-top: 2rem;
     color: var(--black);
+    margin-bottom: 2rem;
 }
 
 .route__publication{
     text-transform: uppercase;
     color: rgb(171, 171, 171);
-    margin-bottom: 2rem;
+    font-size: 0.7rem;
+    margin-top: 1rem;
 }
 
 .route__description{
     color: white;
     line-height: 1.35;
     margin-bottom: 2rem;
+    font-size: 0.8rem;
 }
 
 /* Attraction card */
